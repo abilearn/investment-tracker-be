@@ -1,5 +1,7 @@
 package com.vaa.investment.tracker.investment_service.dto;
 
+import com.vaa.investment.tracker.investment_service.entity.InvestmentStatus;
+import com.vaa.investment.tracker.investment_service.entity.InvestmentType;
 import lombok.Builder;
 import lombok.Data;
 

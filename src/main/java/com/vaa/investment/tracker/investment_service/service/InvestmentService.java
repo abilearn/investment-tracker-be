@@ -3,6 +3,7 @@ package com.vaa.investment.tracker.investment_service.service;
 import com.vaa.investment.tracker.investment_service.dto.InvestmentRequest;
 import com.vaa.investment.tracker.investment_service.dto.InvestmentResponse;
 import com.vaa.investment.tracker.investment_service.entity.Investment;
+import com.vaa.investment.tracker.investment_service.entity.User;
 import com.vaa.investment.tracker.investment_service.repository.InvestmentRepository;
 import com.vaa.investment.tracker.investment_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
