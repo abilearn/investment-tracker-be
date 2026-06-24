@@ -4,6 +4,8 @@ import com.vaa.investment.tracker.investment_service.dto.AuthRequest;
 import com.vaa.investment.tracker.investment_service.dto.AuthResponse;
 import com.vaa.investment.tracker.investment_service.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
+    private static final Logger log =
+            LoggerFactory.getLogger(AuthController.class);
 
     // ---------------- Register a new user ----------------
     @PostMapping("/register")
