@@ -1,6 +1,8 @@
 package com.vaa.investment.tracker.investment_service.security.config;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,11 +33,13 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
     private final UserDetailsService userDetailsService;
+    private static final Logger log =
+            LoggerFactory.getLogger(SecurityConfig.class);
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
-
+        log.debug("Initializing Spring Security filter chain");
         http
                 .cors(cors -> {})
                 .csrf(AbstractHttpConfigurer::disable)
@@ -58,6 +62,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
+        log.debug("Creating DaoAuthenticationProvider");
         DaoAuthenticationProvider provider =
                 new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
@@ -74,6 +79,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration configuration) throws Exception {
+        log.debug("Creating AuthenticationManager");
         return configuration.getAuthenticationManager();
     }
 
@@ -81,6 +87,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration configuration = new CorsConfiguration();
+        log.debug("Configuring CORS");
 
         configuration.setAllowedOrigins(
                 List.of("http://localhost:5173") //  for real time cloud app write it in properties file/configmap
@@ -95,7 +102,9 @@ public class SecurityConfig {
         );
 
         configuration.setAllowCredentials(true);
-
+        log.debug("Allowed Origins : {}", configuration.getAllowedOrigins());
+        log.debug("Allowed Methods : {}", configuration.getAllowedMethods());
+        log.debug("Allowed Headers : {}", configuration.getAllowedHeaders());
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
 
